@@ -1,3 +1,7 @@
 API (application programming interface)
 dynamic variable; :variable in path
 app.use() middleware    
+morgan is a logger library, easier to watch logs
+
+express.Router() mounts other routes to a parent.
+Easier to watch over routes
