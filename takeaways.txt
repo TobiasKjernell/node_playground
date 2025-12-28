@@ -1,2 +1,3 @@
 API (application programming interface)
 dynamic variable; :variable in path
+app.use() middleware    
