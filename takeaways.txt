@@ -5,3 +5,12 @@ morgan is a logger library, easier to watch logs
 
 express.Router() mounts other routes to a parent.
 Easier to watch over routes
+
+mongodb:
+atlas is a gui version application for our database.
+cluster is a instance of our db.
+
+mongoose:
+a ODM(Object Data Modeling) on top of mongoDB and nodejs.
+It provides us the ability to modal schemas and much more.
+Schema is a blueprint of the document/data we writing, similiar to classes in C#
