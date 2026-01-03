@@ -37,11 +37,18 @@ exports.getAllTours = async (req, res) => {
             const sortBy = req.query.sort.split(',').join(' ')
             query = query.sort(sortBy);
         } else {
-            query = query.sort('-createdAt');       
+            query = query.sort('-createdAt');
         }
 
+        //Limiting
+        if (req.query.fields) {
+            const fields = req.query.fields.split(',').join(' ');
+            query = query.select(fields)
+        }else {
+            query = query.select('-__v')
+        }
 
-        const tours = await query;
+        const tours = await query;      
         // .where('duration')
         // .equals('5') 
         // .where('difficulty')     
