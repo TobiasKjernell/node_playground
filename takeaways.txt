@@ -14,3 +14,15 @@ mongoose:
 a ODM(Object Data Modeling) on top of mongoDB and nodejs.
 It provides us the ability to modal schemas and much more.
 Schema is a blueprint of the document/data we writing, similiar to classes in C#
+
+Aggregation:
+Aggregation operations process data records and return computed results.
+
+Not only do we have the ability to aggregate data on the client side with JavaScript,
+but we can use MongoDB to run operations on the server against our collections stored in the database before the result is returned to the client.
+
+Aggregations overrides your schema values and create new variables.
+This might be useful since you can do calculations with this pipeline and return new values
+to client.
+
+        
