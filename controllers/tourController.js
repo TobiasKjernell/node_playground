@@ -37,20 +37,32 @@ exports.getAllTours = async (req, res) => {
             const sortBy = req.query.sort.split(',').join(' ')
             query = query.sort(sortBy);
         } else {
-            query = query.sort('-createdAt');
+            query = query.sort('-createdAt _id');
         }
 
         //Limiting
         if (req.query.fields) {
             const fields = req.query.fields.split(',').join(' ');
             query = query.select(fields)
-        }else {
+        } else {
             query = query.select('-__v')
         }
 
-        const tours = await query;      
+        //Pagination
+        const page = req.query.page * 1 || 1;
+        const limit = req.query.limit * 1 || 100;
+        const skip = (page - 1) * limit;
+        query = query.skip(skip).limit(limit);
+
+        if (req.query.page) {
+            const numTours = await Tour.countDocuments();
+            if (skip >= numTours) {
+                throw new Error('this page does not exist')
+            }
+        }
+        const tours = await query;
         // .where('duration')
-        // .equals('5') 
+        // .equals('5')     
         // .where('difficulty')     
         // .equals('easy')
 
