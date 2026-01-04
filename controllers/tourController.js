@@ -20,14 +20,20 @@ const Tour = require('./../models/tourModel');
 //     next();
 // }
 
+exports.aliasTopTours = (req, res, next) => {
+     req.url =   req.url =
+    "/?sort=-ratingsAverage,price&fields=ratingsAverage,price,name,difficulty,summary&limit=5";
+    next();
+};
+
 exports.getAllTours = async (req, res) => {
     try {
         //Filtering
         const queryObj = { ...req.query };
-
         const excludeFields = ['page', 'sort', 'limit', 'fields']
         excludeFields.forEach(el => delete queryObj[el])
 
+        console.log(req.query.limit)
         //Advanced filering 
         let queryStr = JSON.stringify(queryObj);
         queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`)
