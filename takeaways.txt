@@ -25,4 +25,14 @@ Aggregations overrides your schema values and create new variables.
 This might be useful since you can do calculations with this pipeline and return new values
 to client.
 
-        
+Schema Virtuals:
+Virtuals are a powerful feature in Mongoose that allow us to add attributes to documents without actually storing them in the database. These properties can be dynamically calculated based on other fields, making it easier to manage and manipulate your data. In this comprehensive article, we’ll dive into Mongoose Schema Virtuals, explaining how to use virtuals for computed properties in your Mongoose models.
+
+What are Mongoose Schema Virtuals?
+Mongoose Schemas Virtuals are document attributes that only exist logically and are not written to the document's collection in the MongoDB database. They do not persist or get stored there. When we access the virtual property, Mongoose calls the get method.
+
+Virtual property setters are applied before other validation. For example, a virtual property can be used to combine first and last names into a full name, or format a date field. Virtuals are helpful for transforming or combining data without altering the actual structure of the database.
+
+Efficient Data Handling: Virtuals help keep your database clean by allowing you to compute data dynamically without storing it in the database.
+Cleaner Code: They allow you to encapsulate logic for computed properties, such as concatenating names, calculating totals, or formatting data, directly within the schema.
+Improved Data Integrity: Virtuals ensure that derived fields are always consistent, making your application logic easier to maintain.
