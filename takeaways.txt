@@ -36,3 +36,8 @@ Virtual property setters are applied before other validation. For example, a vir
 Efficient Data Handling: Virtuals help keep your database clean by allowing you to compute data dynamically without storing it in the database.
 Cleaner Code: They allow you to encapsulate logic for computed properties, such as concatenating names, calculating totals, or formatting data, directly within the schema.
 Improved Data Integrity: Virtuals ensure that derived fields are always consistent, making your application logic easier to maintain.
+
+Schema Pre():
+
+The pre() method in Mongoose is used to define pre-hooks (middleware functions) that run before the execution of certain operations on Mongoose documents or queries. This allows us to perform operations such as validation,
+    logging, or document modification before saving, updating, or deleting data in your MongoDB collections. The pre() method is called on a Mongoose schema and attaches middleware to a specific schema method (e.g., save(), update(), find()).
