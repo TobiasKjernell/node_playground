@@ -21,7 +21,7 @@ const APIFeatures = require('./../utils/apiFeatures')
 // }
 
 exports.aliasTopTours = (req, res, next) => {
-    req.url = req.url =
+    req.url =   
         "/?sort=-ratingsAverage,price&fields=ratingsAverage,price,name,difficulty,summary&limit=5";
     next();
 };
@@ -46,9 +46,9 @@ exports.getAllTours = async (req, res) => {
             }
         })
     } catch (err) {
-        res.status(404).json({
-            status: 'failed'
-
+        res.status(404).json({      
+            status: 'failed',
+            message: err.message
         });
     }
 }

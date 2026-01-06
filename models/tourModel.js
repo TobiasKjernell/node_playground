@@ -79,17 +79,20 @@ tourSchema.pre('save', function (next) {
 })
 
 //Middleware query, 'find' processes the query, not the document
-tourSchema.pre('/^find/', function (next) {
+tourSchema.pre(/^find/, function () {
     this.find({ secretTour: { $ne: true } })
     this.start = Date.now();
-    next();  
 })
 
-tourSchema.post('/^find/', function (docs, next) {
-    console.log(`Query took ${Date.now() - docs.start} ms`)
-    next();
+tourSchema.post(/^find/, function (docs) {
+    console.log(`Query took ${Date.now() - this.start} ms`)
 })
 
+// Aggregation middleware    
+tourSchema.pre('aggregate', function () {
+    this.pipeline().unshift({ $match: { secretTour: { $ne: true } } })
+    console.log(this.pipeline());
+});
 
 const Tour = mongoose.model('Tours', tourSchema);
 
