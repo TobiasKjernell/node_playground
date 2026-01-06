@@ -57,20 +57,39 @@ const tourSchema = new mongoose.Schema({
         select: false
     },
     slug: String,
-    startDates: [Date]
+    startDates: [Date],
+    secretTour: {
+        type: Boolean,
+        default: false
+    }
 }, {
-    toJSON: { virtuals: true }, 
-    toObject: { virtuals: true }    
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 })
 
+//Virtual, not going into database. Only sends a extra custom data field to client
 tourSchema.virtual('durationWeeks').get(function () {
     return this.duration / 7;
 });
 
-tourSchema.pre('save', function(next) { 
-    this.slug = slugify(this.name, { lower: true})
+//Middleware before saving, (Post() is after)
+tourSchema.pre('save', function (next) {
+    this.slug = slugify(this.name, { lower: true })
     next()
 })
+
+//Middleware query, 'find' processes the query, not the document
+tourSchema.pre('/^find/', function (next) {
+    this.find({ secretTour: { $ne: true } })
+    this.start = Date.now();
+    next();  
+})
+
+tourSchema.post('/^find/', function (docs, next) {
+    console.log(`Query took ${Date.now() - docs.start} ms`)
+    next();
+})
+
 
 const Tour = mongoose.model('Tours', tourSchema);
 
