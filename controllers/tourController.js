@@ -70,7 +70,6 @@ exports.getSingleTour = async (req, res) => {
 }
 
 exports.createTour = async (req, res) => {
-
     try {
         const newTour = await Tour.create(req.body);
 
@@ -82,6 +81,10 @@ exports.createTour = async (req, res) => {
         })
     } catch (err) {
 
+        res.status(404).json({
+            status: 'failed',
+            message: err.message
+        })
     }
 }
 
